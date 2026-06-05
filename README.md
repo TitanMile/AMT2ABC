@@ -1,103 +1,107 @@
-# AMT2ABC：从原子机理到原子业务能力的工业软件 Compiler
+# AMT2ABC: From Atomic Mechanism Triplets to Atomic Business Capabilities — An Industrial Software Compiler
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**AMT2ABC** 是一个开源的工业软件能力编译生态。它将工业机理（Atomic Mechanism Triplet, AMT）自动编译为可复用的原子业务能力（Atomic Business Capability, ABC），为工业智能化提供从业务目标到可执行应用的自动化编译能力。
+**English** | [简体中文](./README.zh-CN.md)
 
-> 工业软件缺的不是AI，而是Compiler。  
-> —— AMT2ABC 核心主张
+---
 
-## 为什么需要 AMT2ABC？
+**AMT2ABC** is an open-source industrial software capability compilation ecosystem. It automatically compiles industrial mechanisms (Atomic Mechanism Triplet, **AMT**) into reusable Atomic Business Capabilities (**ABC**), providing industrial intelligence with automated compilation from business goals to executable applications.
 
-传统工业软件开发长期陷入"项目制、烟囱式、变更代价高"的困境。不同产线、不同工艺之间难以复用能力，每次变更都需要大量手工修改代码。AMT2ABC 借鉴华为韬(τ)定律和 RISC+Compiler 的历史经验，将复杂度从底层代码转移到实例配置层，让系统自动理解业务目标并编译出最优能力组合。
+> What industrial software lacks is not AI, but a Compiler.
+> — AMT2ABC core thesis
 
-## 核心概念
+## Why AMT2ABC?
 
-| 概念 | 全称 | 说明 |
-|------|------|------|
-| **AMT** | Atomic Mechanism Triple | 原子机理三元组，不可再拆的最小工业因果单元，如"负载↑ → 振动↑" |
-| **SECP** | Structure, Event, Configuration, Process | 工业软件的四维语法，为 AMT 提供统一的结构化标签 |
-| **ABC** | Atomic Business Capability | 原子业务能力，可独立部署、跨场景复用的最小软件能力单元 |
-| **Compiler** | AMT2ABC Compiler | 从业务目标（GS）自动抽取 AMT Cluster，封装为 ABC 并编排为 App/Agent 的系统 |
+Traditional industrial software development has long been trapped in a "project-based, siloed, costly-to-change" dilemma. Capabilities are hard to reuse across production lines and processes, and every change requires extensive manual code modification. Drawing on Huawei's Tau (τ) Law and the historical lessons of RISC + Compiler, AMT2ABC shifts complexity from low-level code to the instance-configuration layer, letting the system automatically understand business goals and compile optimal capability combinations.
 
-## 架构概览
+## Core Concepts
+
+| Concept | Full Name | Description |
+|---------|-----------|-------------|
+| **AMT** | Atomic Mechanism Triplet | The smallest irreducible industrial causal unit, e.g. "load ↑ → vibration ↑" |
+| **SECP** | Structure, Event, Configuration, Process | The four-dimensional grammar of industrial software, providing unified structural labels for AMT |
+| **ABC** | Atomic Business Capability | A minimum software capability unit that can be independently deployed and reused across scenarios |
+| **Compiler** | AMT2ABC Compiler | The system that automatically extracts AMT Clusters from business goals (GS), packages them as ABCs, and orchestrates them into Apps/Agents |
+
+## Architecture Overview
 
 ```
 Working Domain → Mechanism → AMT → AMT Graph
                                            ↓
-GS(目标) → AMT Cluster → ABC
-                           ↓
-              App/Agent → Scenario → OAO Loop
+GS (Goal)  →  AMT Cluster  →  ABC
+                                ↓
+                  App/Agent → Scenario → OAO Loop
 ```
 
-- **人定义的部分**：工作域、机理、AMT、AMT Graph
-- **Compiler 自动完成的部分**：GS → AMT Cluster → ABC → App/Agent
+- **Human-defined parts**: Working Domain, Mechanism, AMT, AMT Graph
+- **Compiler-automated parts**: GS → AMT Cluster → ABC → App/Agent
 
-## 快速开始
+## Quick Start
 
-### 前提条件
+### Prerequisites
 
-- 了解工业机理的基本概念
-- 熟悉 YAML/JSON 配置
+- Basic understanding of industrial mechanisms
+- Familiarity with YAML/JSON configuration
 
-### 安装 Compiler 原型（MVP）
+### Install the Compiler Prototype (MVP)
 
 ```bash
 git clone https://github.com/zylliondata/AMT2ABC.git
 cd AMT2ABC
-# 具体安装步骤见 docs/installation.md（即将补充）
+# Detailed installation steps: docs/installation.md (coming soon)
 ```
 
-### 最简单的示例
+### Minimal Example
 
-输入目标："降低气孔率"（压铸产线）
+Input goal: "Reduce porosity rate" (die-casting line)
 
-Compiler 输出推荐的 ABC 组合（JSON 格式示例）：
+Compiler outputs a recommended ABC combination (JSON example):
 
 ```json
 {
-  "goal": "降低气孔率",
-  "recommended_abc": ["模温控制ABC", "压射速度优化ABC", "真空度管理ABC"]
+  "goal": "Reduce porosity rate",
+  "recommended_abc": ["Mold-Temperature Control ABC", "Shot-Speed Optimization ABC", "Vacuum Management ABC"]
 }
 ```
 
-详细教程请参考 docs/getting-started.md（即将补充）。
+For a full tutorial, see `docs/getting-started.md` (coming soon).
 
-## 开源生态计划
+## Open-Source Roadmap
 
-| 阶段 | 时间 | 目标 |
-|------|------|------|
-| 1. 上手原型 | 今年 Q3 | 开源 Compiler MVP + 压铸产线示例 |
-| 2. 贡献社区 | 今年 Q4 起 | 开放 AMT/SECP 范式贡献通道 |
-| 3. ABC Registry | 明年起 | 类似 Docker Hub 的 ABC 能力市场 |
-| 4. 推动标准化 | 三年后 | 国内团体标准 → 国际标准 |
+| Phase | Timeline | Goal |
+|-------|----------|------|
+| 1. Hands-on Prototype | This year Q3 | Open-source Compiler MVP + die-casting line example |
+| 2. Community Contributions | This year Q4+ | Open contribution channels for AMT/SECP patterns |
+| 3. ABC Registry | Next year | An ABC capability marketplace, similar to Docker Hub |
+| 4. Standardization | Three years out | National association standards → international standards |
 
-## 参与贡献
+## Contributing
 
-我们欢迎所有形式的贡献，包括但不限于：
+We welcome contributions in all forms, including but not limited to:
 
-- 提交新的 AMT 范式或 SECP 指纹
-- 封装并共享 ABC 模块
-- 改进 Compiler 的匹配算法
-- 完善文档和教程
+- Submitting new AMT patterns or SECP fingerprints
+- Packaging and sharing ABC modules
+- Improving the Compiler's matching algorithm
+- Improving documentation and tutorials
 
-请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详细流程。
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed workflows.
 
-## 行为准则
+## Code of Conduct
 
-本项目遵循 Contributor Covenant Code of Conduct。请阅读[全文](CODE_OF_CONDUCT.md)。
+This project follows the Contributor Covenant Code of Conduct. Please read the [full text](CODE_OF_CONDUCT.md).
 
-## 安全报告
+## Security
 
-如发现安全漏洞，请参考 [SECURITY.md](SECURITY.md) 中的报告流程。
+To report a security vulnerability, please follow the process in [SECURITY.md](SECURITY.md).
 
-## 许可证
+## License
 
 [Apache 2.0 License](LICENSE) © AMT2ABC Contributors
 
-## 联系我们
+## Contact
 
-- 提交 Issue：<https://github.com/zylliondata/AMT2ABC/issues>
-- 社区讨论：<https://github.com/zylliondata/AMT2ABC/discussions>
-- 邮箱：info@zylliondata.com
+- Issues: <https://github.com/zylliondata/AMT2ABC/issues>
+- Discussions: <https://github.com/zylliondata/AMT2ABC/discussions>
+- Email: info@zylliondata.com
